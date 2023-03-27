@@ -6,10 +6,10 @@ import java.math.BigDecimal;
 import java.util.Set;
 
 @Data
-public class RequestProduct {
+public class ProductRequest {
     private String name;
     private BigDecimal price;
     private Long categoryId;
-    private Set<RequestStock> stocks;
+    private Set<StockRequest> stocks;
     private int criticalThreshold;
 }

@@ -1,8 +1,10 @@
 package com.example.inventory.model;
 
+import com.example.inventory.dto.StockDTO;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 
@@ -19,7 +21,11 @@ public class Stock {
     private Warehouse warehouse;
     @NotNull
     private Integer quantity;
-    @NotNull
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    public StockDTO toDTO() {
+        return new ModelMapper().map(this, StockDTO.class);
+    }
+
 }

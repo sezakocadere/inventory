@@ -4,11 +4,12 @@ import com.sun.istack.NotNull;
 import lombok.Data;
 
 @Data
-public class RequestStock {
+public class WarehouseRequest {
+    private String name;
     @NotNull
-    private Long productId;
+    private String address;
     @NotNull
-    private Long warehouseId;
+    private String region;
     @NotNull
-    private Integer quantity;
+    private String city;
 }

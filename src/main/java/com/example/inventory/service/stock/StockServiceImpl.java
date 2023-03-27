@@ -1,14 +1,18 @@
 package com.example.inventory.service.stock;
 
+import com.example.inventory.error.NotFoundObjectException;
 import com.example.inventory.model.Product;
+import com.example.inventory.model.Status;
 import com.example.inventory.model.Stock;
 import com.example.inventory.model.Warehouse;
 import com.example.inventory.repository.ProductRepository;
 import com.example.inventory.repository.StockRepository;
 import com.example.inventory.repository.WarehouseRepository;
-import com.example.inventory.request.RequestStock;
+import com.example.inventory.request.StockRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -18,19 +22,19 @@ public class StockServiceImpl implements StockService {
     private final ProductRepository productRepository;
 
     @Override
-    public Warehouse getWarehousesByProductId(Long productId) {
-        warehouseRepository.findWarehousesByProductId(productId);
-        return null;
+    public List<Warehouse> getWarehousesByProductId(Long productId) {
+        return stockRepository.findWarehouseByProductId(productId);
     }
 
     @Override
-    public Stock createStock(RequestStock requestStock) {
+    public Stock createStock(StockRequest requestStock) {
         Stock stock = new Stock();
         stock.setQuantity(requestStock.getQuantity());
-        Warehouse warehouse = warehouseRepository.findById(requestStock.getWarehouseId()).orElseThrow();
+        Warehouse warehouse = warehouseRepository.findById(requestStock.getWarehouseId()).orElseThrow(() -> new NotFoundObjectException("Not Found Warehouse"));
         stock.setWarehouse(warehouse);
-        Product product = productRepository.findById(requestStock.getProductId()).orElseThrow();
+        Product product = productRepository.findById(requestStock.getProductId()).orElseThrow(() -> new NotFoundObjectException("Not Found Product"));
         stock.setProduct(product);
+        stock.setStatus(Status.ACTIVE);
         stockRepository.save(stock);
         return stock;
     }

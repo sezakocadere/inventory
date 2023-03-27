@@ -1,7 +1,8 @@
 package com.example.inventory.model;
 
-import com.sun.istack.NotNull;
+import com.example.inventory.dto.WarehouseDTO;
 import lombok.Data;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 
@@ -11,12 +12,14 @@ public class Warehouse {
     @Id
     @GeneratedValue
     private Long id;
-    @NotNull
     private String name;
     private String address;
     private String region;
     private String city;
-    @NotNull
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    public WarehouseDTO toDTO() {
+        return new ModelMapper().map(this, WarehouseDTO.class);
+    }
 }

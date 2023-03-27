@@ -1,6 +1,8 @@
 package com.example.inventory.model;
 
+import com.example.inventory.dto.CategoryDTO;
 import lombok.Data;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,4 +17,7 @@ public class Category {
     private String name;
     private String description;
 
+    public CategoryDTO toDTO() {
+        return new ModelMapper().map(this, CategoryDTO.class);
+    }
 }

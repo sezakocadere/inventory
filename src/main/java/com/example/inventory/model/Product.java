@@ -2,6 +2,8 @@ package com.example.inventory.model;
 
 import com.example.inventory.dto.ProductDTO;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
@@ -9,7 +11,8 @@ import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Product {
     @Id
     @GeneratedValue
