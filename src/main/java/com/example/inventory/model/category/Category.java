@@ -1,4 +1,4 @@
-package com.example.inventory.model;
+package com.example.inventory.model.category;
 
 import com.example.inventory.dto.CategoryDTO;
 import lombok.Data;

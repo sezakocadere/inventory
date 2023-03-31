@@ -1,7 +1,7 @@
 package com.example.inventory.repository;
 
-import com.example.inventory.model.Product;
-import com.example.inventory.model.Status;
+import com.example.inventory.model.product.Product;
+import com.example.inventory.enums.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

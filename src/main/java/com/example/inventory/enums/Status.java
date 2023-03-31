@@ -1,4 +1,4 @@
-package com.example.inventory.model;
+package com.example.inventory.enums;
 
 public enum Status {
     ACTIVE,

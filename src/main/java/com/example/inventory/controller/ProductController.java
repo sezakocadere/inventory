@@ -2,8 +2,9 @@ package com.example.inventory.controller;
 
 import com.example.inventory.dto.ProductDTO;
 import com.example.inventory.dto.ProductFilterRequest;
-import com.example.inventory.model.Product;
-import com.example.inventory.model.Warehouse;
+import com.example.inventory.dto.StockDTO;
+import com.example.inventory.model.product.Product;
+import com.example.inventory.model.warehouse.Warehouse;
 import com.example.inventory.request.ProductRequest;
 import com.example.inventory.service.product.ProductService;
 import com.example.inventory.service.stock.StockService;
@@ -37,8 +38,8 @@ public class ProductController {
     }
 
     @DeleteMapping(value = "/{productId}")
-    public void removeProduct(@RequestBody Long productId) {
-        productService.removeProduct(productId);
+    public ProductDTO removeProduct(@RequestBody Long productId) {
+        return productService.removeProduct(productId).toDTO();
     }
 
     @PutMapping
@@ -47,13 +48,12 @@ public class ProductController {
     }
 
     @PutMapping(value = "/{value}/{stockId}")
-    public void reductionProduct(@PathVariable int value, @PathVariable Long stockId) {
-        productService.reductionProduct(value, stockId);
+    public StockDTO reductionProduct(@PathVariable int value, @PathVariable Long stockId) {
+        return productService.reductionProduct(value, stockId).toDTO();
     }
 
     @GetMapping(value = "/{productId}")
     public List<Warehouse> listWarehousesByProductId(Long productId) {
         return stockService.getWarehousesByProductId(productId);
     }
-
 }

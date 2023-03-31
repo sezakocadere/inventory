@@ -1,6 +1,9 @@
-package com.example.inventory.model;
+package com.example.inventory.model.stock;
 
 import com.example.inventory.dto.StockDTO;
+import com.example.inventory.enums.Status;
+import com.example.inventory.model.warehouse.Warehouse;
+import com.example.inventory.model.product.Product;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;

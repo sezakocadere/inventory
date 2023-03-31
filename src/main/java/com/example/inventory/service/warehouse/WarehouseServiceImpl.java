@@ -1,7 +1,7 @@
 package com.example.inventory.service.warehouse;
 
-import com.example.inventory.model.Status;
-import com.example.inventory.model.Warehouse;
+import com.example.inventory.enums.Status;
+import com.example.inventory.model.warehouse.Warehouse;
 import com.example.inventory.repository.WarehouseRepository;
 import com.example.inventory.request.WarehouseRequest;
 import lombok.RequiredArgsConstructor;

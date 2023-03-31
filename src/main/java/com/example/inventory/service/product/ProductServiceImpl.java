@@ -1,9 +1,13 @@
 package com.example.inventory.service.product;
 
 import com.example.inventory.dto.ProductFilterRequest;
+import com.example.inventory.enums.Status;
 import com.example.inventory.error.NotFoundObjectException;
 import com.example.inventory.error.UnexpectedValueException;
-import com.example.inventory.model.*;
+import com.example.inventory.model.category.Category;
+import com.example.inventory.model.product.Product;
+import com.example.inventory.model.stock.Stock;
+import com.example.inventory.model.warehouse.Warehouse;
 import com.example.inventory.repository.CategoryRepository;
 import com.example.inventory.repository.ProductRepository;
 import com.example.inventory.repository.StockRepository;
@@ -50,10 +54,6 @@ public class ProductServiceImpl implements ProductService {
         return categoryRepository.findById(id).orElseThrow(() -> new NotFoundObjectException("Does not have category id: " + id));
     }
 
-    private Warehouse getWarehouse(Long id) {
-        return warehouseRepository.findByIdAndStatus(id, Status.ACTIVE).orElseThrow(() -> new NotFoundObjectException("Does not have warehouse id: " + id));
-    }
-
     private Product getProduct(Long id) {
         return productRepository.findByIdAndStatus(id, Status.ACTIVE).orElseThrow(() -> new NotFoundObjectException("Product not found with id: " + id));
     }
@@ -64,15 +64,16 @@ public class ProductServiceImpl implements ProductService {
 
     @Transactional
     @Override
-    public void removeProduct(Long id) {
+    public Product removeProduct(Long id) {
         Product product = getProduct(id);
         product.setStatus(Status.PASSIVE);
         productRepository.save(product);
+        return product;
     }
 
     @Transactional
     @Override
-    public void reductionProduct(int value, Long stockId) {
+    public Stock reductionProduct(int value, Long stockId) {
         Stock stock = getStock(stockId);
         int newStock = stock.getQuantity() - value;
         if (newStock < 0) {
@@ -81,6 +82,7 @@ public class ProductServiceImpl implements ProductService {
         checkCriticalThreshold(newStock, stock.getProduct().getCriticalThreshold());
         stock.setQuantity(newStock);
         stockRepository.save(stock);
+        return stock;
     }
 
     @Transactional

@@ -1,6 +1,6 @@
 package com.example.inventory.dto;
 
-import com.example.inventory.model.Status;
+import com.example.inventory.enums.Status;
 import lombok.Data;
 
 @Data

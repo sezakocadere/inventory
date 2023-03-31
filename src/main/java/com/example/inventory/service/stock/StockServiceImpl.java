@@ -1,10 +1,10 @@
 package com.example.inventory.service.stock;
 
 import com.example.inventory.error.NotFoundObjectException;
-import com.example.inventory.model.Product;
-import com.example.inventory.model.Status;
-import com.example.inventory.model.Stock;
-import com.example.inventory.model.Warehouse;
+import com.example.inventory.model.product.Product;
+import com.example.inventory.enums.Status;
+import com.example.inventory.model.stock.Stock;
+import com.example.inventory.model.warehouse.Warehouse;
 import com.example.inventory.repository.ProductRepository;
 import com.example.inventory.repository.StockRepository;
 import com.example.inventory.repository.WarehouseRepository;

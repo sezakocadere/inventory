@@ -1,6 +1,7 @@
-package com.example.inventory.model;
+package com.example.inventory.model.warehouse;
 
 import com.example.inventory.dto.WarehouseDTO;
+import com.example.inventory.enums.Status;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
 
